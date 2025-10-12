@@ -27,7 +27,7 @@ const NavMenu = () => {
              <img
               src="/images/Logo.png"
               alt="Logo du site"
-              className="w-32 h-auto"
+              className="w-42 h-auto"
              />
           </div>
 
