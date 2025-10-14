@@ -5,6 +5,8 @@ import 'aos/dist/aos.css'
 // COMPONENTS
 import NavMenu from './components/NavMenu'
 import Hero from './components/Hero'
+import PopupInfo from "./components/PopupInfo";
+import About from "./components/About"
 
 const App = () => {
   // EFFETS D'ANNIMATION 
@@ -12,16 +14,16 @@ const App = () => {
     AOS.init({
       duration: 1000,
       easing: 'ease-in-out',
-      once: false,
+      once: true,
       offset: 100
     });
   }, {});
   return (
     <div className='pt-37'>
-      {/* Menu de navigation  */}
+      <PopupInfo />
       <NavMenu />
-      {/* Header */}
       <Hero />
+      <About />
     </div>
   )
 }

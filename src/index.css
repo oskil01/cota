@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* About-bg-animated */
+@keyframes waves {
+  0% {
+    background-position: 0% 0%, 100% 100%;
+  }
+  50% {
+    background-position: 100% 0%, 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 100%;
+  }
+}
+
+.animate-waves {
+  background-size: 200% 200%;
+  animation: waves 10s ease-in-out infinite;
+}

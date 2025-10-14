@@ -4,7 +4,7 @@ import { useState } from "react";
 // LISTE DU MENU
 const navItems = [
     {name:"Accueil", href:'#'},
-    {name:"A propos", href:'#apropos'},
+    {name:"A propos", href:'#about'},
     {name:"Domaines", href:'#domaines'},
     {name:"Ressources", href:'#ressources'},
     {name:"Actualités", href:'#actualites'},
@@ -37,7 +37,7 @@ const NavMenu = () => {
             {navItems.map(({name, href}) =>(
                 <li key={name}>
                     <a 
-                     href=""
+                     href={href}
                      className="hover:text-[#CA451B] cursor-pointer
                      transition-colors"
                     >
