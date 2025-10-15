@@ -7,6 +7,7 @@ import NavMenu from './components/NavMenu'
 import Hero from './components/Hero'
 import PopupInfo from "./components/PopupInfo";
 import About from "./components/About"
+import WhyCota from "./components/WhyCota"
 
 const App = () => {
   // EFFETS D'ANNIMATION 
@@ -19,11 +20,12 @@ const App = () => {
     });
   }, {});
   return (
-    <div className='pt-37'>
+    <div className='pt-17 md:pt-30'>
       <PopupInfo />
       <NavMenu />
       <Hero />
       <About />
+      <WhyCota />
     </div>
   )
 }

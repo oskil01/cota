@@ -13,28 +13,38 @@ export default function PopupInfo() {
   }, []);
 
   const handleAccept = () => {
-    // localStorage.setItem("siteAccepted", "true");
+    localStorage.setItem("siteAccepted", "true"); // sauvegarde le choix
     setShowPopup(false);
   };
 
   if (!showPopup) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
-      <div className="bg-white rounded-2xl shadow-xl p-6 max-w-md text-center animate-fadeIn">
-        <h2 className="text-2xl font-semibold text-primary mb-3">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-50">
+      <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md text-center animate-fadeIn">
+        <h2 className="text-2xl font-bold text-blue-800 mb-4">
           ⚠️ Site en cours de développement
         </h2>
-        <p className="text-gray-700 mb-5">
+        <p className="text-gray-700 mb-6">
           Ce site est actuellement en phase de construction. Certaines sections
           peuvent ne pas encore être fonctionnelles ou finales.
         </p>
-        <button
-          onClick={handleAccept}
-          className="px-5 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition"
-        >
-          D’accord, continuer
-        </button>
+
+        <div className="flex justify-center space-x-4">
+          <button
+            onClick={handleAccept}
+            className="px-6 py-2 bg-blue-700 text-white rounded-lg shadow hover:bg-blue-800 transition"
+          >
+            Voir le site
+          </button>
+
+          <button
+            onClick={() => setShowPopup(false)}
+            className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition"
+          >
+            Fermer
+          </button>
+        </div>
       </div>
     </div>
   );

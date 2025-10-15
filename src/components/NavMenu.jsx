@@ -19,7 +19,7 @@ const NavMenu = () => {
     <nav className="fixed w-full bg-gray-50 top-0 left-o 
     right-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 
-        md:px-12 lg:px-20 py-3 md:py-4 flex items-center 
+        md:px-12 lg:px-20 flex items-center 
         justify-between">
         
           {/* LOGO DU SITE */}
@@ -27,7 +27,7 @@ const NavMenu = () => {
              <img
               src="/images/Logo.png"
               alt="Logo du site"
-              className="w-42 h-auto"
+              className="w-30 md:w-42 h-auto "
              />
           </div>
 
