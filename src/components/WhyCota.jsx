@@ -10,7 +10,6 @@ import {
 const WhyCota = () => {
   return (
     <section 
-      id="domaines"
       className="relative overflow-hidden bg-gradient-to-br
       from-blue-50 to-purple-50 py-12 px-4 sm:py-16 
       md:py-20 md:px-12 lg:px-20"
@@ -37,7 +36,7 @@ const WhyCota = () => {
           <div className="relative flex justify-center order-2 lg:order-1">
             <div 
               className="w-full max-w-md lg:max-w-lg xl:max-w-xl
-              h-[520px] overflow-hidden bg-gray-50 shadow-xl absolute top-0 
+              h-[480px] md:h-[480px] lg:h-[500px] overflow-hidden bg-gray-50 shadow-xl absolute top-0 
               rounded-[30%_10%_20%_70%/60%_30%_70%_30%]"
               data-aos="fade-right"
               data-aos-delay="100"
@@ -50,7 +49,7 @@ const WhyCota = () => {
                 <Zap className="w-7 h-7 sm:h-8 sm:w-8 md:w-9 md:h-9 text-[#03337F]" />
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-1">Efficacité</h3>
-                  <p className="text-gray-600 text-sm sm:text-base">
+                  <p className="text-gray-600 text-[12px] md:text-sm lg:text-md">
                     Nous offrons des solutions concrètes et rapides qui produisent des résultats mesurables.
                   </p>
                 </div>
@@ -61,7 +60,7 @@ const WhyCota = () => {
                 <Users className="w-7 h-7 sm:h-8 sm:w-8 md:w-9 md:h-9 text-[#CA451B]" />
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-1">Expertise</h3>
-                  <p className="text-gray-600 text-sm sm:text-base">
+                  <p className="text-gray-600 text-[12px] md:text-base lg:text-md">
                     Nous disposons d’un savoir-faire technique et professionnel reconnu.
                   </p>
                 </div>
@@ -72,7 +71,7 @@ const WhyCota = () => {
                 <TrendingUp className="w-7 h-7 sm:h-8 sm:w-8 md:w-9 md:h-9 text-[#00AB9A]" />
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-1">Innovation</h3>
-                  <p className="text-gray-600 text-sm sm:text-base">
+                  <p className="text-gray-600 text-[12px] md:text-base lg:text-md">
                     Nous proposons des approches nouvelles et adaptées aux besoins actuels.
                   </p>
                 </div>
@@ -83,7 +82,7 @@ const WhyCota = () => {
                 <HeartHandshake className="w-7 h-7 sm:h-8 sm:w-8 md:w-9 md:h-9 md:h-7 text-[#008EFF]" />
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-1">Engagement</h3>
-                  <p className="text-gray-600 text-sm sm:text-base">
+                  <p className="text-gray-600 text-[12px] md:text-base lg:text-md">
                     Nous œuvrons avec détermination et responsabilité pour le développement durable des partenaires.
                   </p>
                 </div>

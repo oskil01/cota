@@ -8,6 +8,7 @@ import Hero from './components/Hero'
 import PopupInfo from "./components/PopupInfo";
 import About from "./components/About"
 import WhyCota from "./components/WhyCota"
+import Domaines from "./components/Domaines"
 
 const App = () => {
   // EFFETS D'ANNIMATION 
@@ -26,6 +27,7 @@ const App = () => {
       <Hero />
       <About />
       <WhyCota />
+      <Domaines />
     </div>
   )
 }
