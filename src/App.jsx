@@ -9,6 +9,9 @@ import PopupInfo from "./components/PopupInfo";
 import About from "./components/About"
 import WhyCota from "./components/WhyCota"
 import Domaines from "./components/Domaines"
+import Ressources from "./components/Ressources"
+import Contact from './components/Contact'
+// import Actualites from './components/Actualites'
 
 const App = () => {
   // EFFETS D'ANNIMATION 
@@ -28,6 +31,9 @@ const App = () => {
       <About />
       <WhyCota />
       <Domaines />
+      <Ressources />
+      {/* <Actualites /> */}
+      <Contact />
     </div>
   )
 }
