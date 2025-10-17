@@ -137,8 +137,7 @@ const Contact = () => {
                 className={`flex items-center gap-2 px-5 py-2 rounded-full border 
                 transition-all duration-300 ${isActive 
                   ? 'bg-gradient-to-r from-[#0069BD] to-[#CA451B] text-white shadow-lg scale-105'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'} `}
-              >
+                  : 'bg-white text-gray-700 hover:bg-gray-100'} `}>
                 <IconComp className={`w-5 h-5 ${isActive ? 'text-white' : item.color}`} />
                 <span className='font-medium'>{item.label}</span>
               </button>
@@ -150,8 +149,8 @@ const Contact = () => {
         <div className='flex flex-col lg:flex-row gap-10 items-start'>
           
           {/* === FORMULAIRE === */}
-          <div className='flex-1 bg-white rounded-2xl shadow-xl p-8 border border-gray-100' data-aos='fade-right'>
-            <form className='space-y-6'>
+          <div className='flex-1 w-full max-w-full bg-white rounded-2xl shadow-xl p-8 border border-gray-100 mx-auto sm:mx-0' data-aos='fade-right'>
+            <form className='space-y-6 w-full'>
               {renderFormFields()}
               <div data-aos='fade-up' data-aos-delay='300'>
                 <button
@@ -169,17 +168,17 @@ const Contact = () => {
           </div>
 
           {/* === IMAGE / COORDONNÉES === */}
-          <div className='flex-1 flex flex-col items-center lg:items-start'>
+          <div className='flex-1 flex flex-col items-center lg:items-start w-full'>
             {activeTab === 'contact' ? (
               <>
-                <div className='w-full max-w-md h-72 overflow-hidden shadow-lg rounded-xl mb-6' data-aos='zoom-in'>
+                <div className='w-full max-w-md h-72 overflow-hidden shadow-lg rounded-xl mb-6 mx-auto sm:mx-0' data-aos='zoom-in'>
                   <img 
                     src={contactImage} 
                     alt="Nous contacter" 
                     className='object-cover w-full h-full transform hover:scale-105 transition-transform duration-700' 
                   />
                 </div>
-                <div className='space-y-4 w-full max-w-md'>
+                <div className='space-y-4 w-full max-w-md mx-auto sm:mx-0'>
                   {contactInfo.map((item) => {
                     const IconComp = item.icon;
                     return (
@@ -202,7 +201,7 @@ const Contact = () => {
                 </div>
               </>
             ) : (
-              <div className='w-full max-w-md h-72 overflow-hidden shadow-lg rounded-xl mb-6' data-aos='zoom-in'>
+              <div className='w-full max-w-md h-72 overflow-hidden shadow-lg rounded-xl mb-6 mx-auto sm:mx-0' data-aos='zoom-in'>
                 <img 
                   src={illustrationImages[activeTab]} 
                   alt={activeTab === 'plainte' ? "Formulaire de plainte" : "Boîte à suggestions"} 
