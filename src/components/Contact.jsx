@@ -107,18 +107,18 @@ const Contact = () => {
         
         {/* === TITRE === */}
         <div className='text-center mb-10' data-aos='fade-down'>
-          <h2 className='text-3xl sm:text-4xl md:text-5xl text-gray-900 font-bold'>
-            Entrons en <span className='text-[#0069BD]'>contact</span>
+          <h2 className='text-4xl text-gray-700 sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight'>
+            Entrons en <span className='text-[#03337F]'>contact</span>
           </h2>
-          <p className='text-gray-600 mt-3'>
-            Choisissez la manière dont vous souhaitez communiquer avec nous.
-          </p>
-          <div className="flex justify-center gap-3 mt-4 md:mt-8">
+          <div className="flex justify-center gap-3 mt-4">
             <Circle className="text-[#006176] w-5 h-5" />
             <Circle className="text-[#0069BD] w-5 h-5" />
             <Circle className="text-[#CA451B] w-5 h-5" /> 
             <Circle className="text-[#03337F] w-5 h-5" />
           </div>
+          <p className='text-gray-600 mt-3'>
+            Choisissez la manière dont vous souhaitez communiquer avec nous.
+          </p>
         </div>
 
         {/* === MENU INTERACTIF === */}

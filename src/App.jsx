@@ -12,7 +12,8 @@ import Domaines from "./components/Domaines"
 import Ressources from "./components/Ressources"
 import Contact from './components/Contact'
 // import Actualites from './components/Actualites'
-// import Footer from './components/Footer'
+import NewsLetter from './components/NewsLetter'
+import Footer from './components/Footer'
 
 const App = () => {
   // EFFETS D'ANNIMATION 
@@ -35,7 +36,8 @@ const App = () => {
       <Ressources />
       {/* <Actualites /> */}
       <Contact />
-      {/* <Footer /> */}
+      <NewsLetter />
+      <Footer />
     </div>
   )
 }
