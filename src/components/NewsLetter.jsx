@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Send } from "lucide-react";
+import { Mail, Send, Circle } from "lucide-react";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
@@ -47,8 +47,14 @@ const Newsletter = () => {
           Rejoignez notre{" "}
           <span className="text-[#00bfff]">Newsletter</span>
         </h2>
+        <div className="flex justify-center gap-3 mt-4 md:mt-5">
+          <Circle className="text-[#022256] w-5 h-5" />
+          <Circle className="text-[#0069BD] w-5 h-5" />
+          <Circle className="text-[#00AB9A] w-5 h-5" />
+          <Circle className="text-[#CA451B] w-5 h-5" /> 
+        </div>
         <p
-          className="text-gray-300 max-w-2xl mx-auto mb-10 text-lg"
+          className="text-gray-300 max-w-2xl mx-auto mb-10 mt-5 text-md"
           data-aos="fade-up"
           data-aos-delay="200"
         >

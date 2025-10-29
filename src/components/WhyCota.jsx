@@ -18,7 +18,7 @@ const WhyCota = () => {
 
         {/* === TITRE DE LA SECTION === */}
         <div className="text-center mb-10" data-aos="fade-down">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-5xl font-extrabold mb-4 leading-tight">
             Pourquoi<span className="text-[#0069BD]"> choisir COTA ?</span>
           </h2>
           <div className="flex justify-center gap-3 mt-4 md:mt-5">

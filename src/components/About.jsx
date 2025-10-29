@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import about from "../assets/about.jpg";
 import { ArrowRight, Circle, Target, Eye } from "lucide-react";
 
@@ -131,10 +133,11 @@ export default function AboutSection() {
 
         <div
           className="flex justify-center lg:justify-start mt-8
-        md:mt-10"
+          md:mt-10"
           data-aos="fade-up"
           data-aos-delay="300"
         >
+          <Link src to='./a-propos'>
           <button
             className="bg-[#CA451B] text-white md:px-8
            font-medium px-6 py-3 rounded-full md:py-4
@@ -145,6 +148,7 @@ export default function AboutSection() {
             En savoir plus
             <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
           </button>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,32 +1,28 @@
-import { useEffect } from 'react'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-// COMPONENTS
-import NavMenu from './components/NavMenu'
-import Hero from './components/Hero'
+// === COMPONENTS (accueil) ===
+import NavMenu from "./components/NavMenu";
+import Hero from "./components/Hero";
 import PopupInfo from "./components/PopupInfo";
-import About from "./components/About"
-import WhyCota from "./components/WhyCota"
-import Domaines from "./components/Domaines"
-import Ressources from "./components/Ressources"
-import Contact from './components/Contact'
-// import Actualites from './components/Actualites'
-import NewsLetter from './components/NewsLetter'
-import Footer from './components/Footer'
+import About from "./components/About";
+import WhyCota from "./components/WhyCota";
+import Domaines from "./components/Domaines";
+import Ressources from "./components/Ressources";
+import Contact from "./components/Contact";
+import NewsLetter from "./components/NewsLetter";
+import Footer from "./components/Footer";
 
-const App = () => {
-  // EFFETS D'ANNIMATION 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      easing: 'ease-in-out',
-      once: true,
-      offset: 100
-    });
-  }, {});
+// === PAGES ===
+import Apropos from "./pages/Apropos"; 
+import DomainesDetails from "./pages/DomainesDetails";
+
+// === Page d'accueil combinée ===
+const Home = () => {
   return (
-    <div className='pt-17 md:pt-30'>
+    <div className="pt-17 md:pt-30">
       <PopupInfo />
       <NavMenu />
       <Hero />
@@ -34,12 +30,33 @@ const App = () => {
       <WhyCota />
       <Domaines />
       <Ressources />
-      {/* <Actualites /> */}
       <Contact />
       <NewsLetter />
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default App
+// === Application principale ===
+const App = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: true,
+      offset: 100,
+    });
+  }, []);
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/a-propos" element={<Apropos />} />
+         <Route path="/domaines" element={<DomainesDetails />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;

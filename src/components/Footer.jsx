@@ -63,12 +63,12 @@ const Footer = () => {
         {/* Réseaux sociaux */}
         <div className="space-y-6">
           {/* LOGO DU SITE */}
-          <div className="mb-[-30px] mt-[-60px]">
+          <div className="mb-[-20px] mt-[-70px]">
             <div className="flex justify-start">
               <img
                 src="/images/footerIcon.png"
                 alt="Logo du site"
-                className="w-30 md:w-52 h-auto object-contain block mx-0 "
+                className="w-50 h-auto object-contain block mx-0 "
               />
             </div>
           </div>
@@ -115,7 +115,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className="space-y-6 z-10">
+        <div className="space-y-6">
           <h3 className="text-xl font-semibold border-[#006176]
             pb-2 inline-block border-b-2">
             Domaines d'activité
