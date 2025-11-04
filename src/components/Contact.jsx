@@ -12,9 +12,20 @@ import {
   ThumbsUp,
   Inbox
 } from 'lucide-react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
   const [activeTab, setActiveTab] = useState('contact');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    subject: '',
+    complaint: '',
+    suggestion: ''
+  });
+  const [loading, setLoading] = useState(false);
 
   // === Infos de contact ===
   const contactInfo = [
@@ -70,6 +81,72 @@ const Contact = () => {
     suggestion: suggestionImage
   };
 
+  // === Fonction d’envoi avec Brevo ===
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const type = activeTab;
+
+    // ✅ Validation du champ email uniquement pour le formulaire de contact
+    if (type === 'contact' && !formData.email) {
+      toast.error("Veuillez entrer votre adresse e-mail.");
+      return;
+    }
+
+    setLoading(true);
+
+    const apiKey = import.meta.env.VITE_BREVO_API_KEY;
+
+    // Construction du contenu du mail
+    const emailContent = `
+      <h3>Nouveau message (${type}) reçu depuis le site :</h3>
+      ${formData.name ? `<p><b>Nom :</b> ${formData.name}</p>` : ""}
+      ${formData.email ? `<p><b>Email :</b> ${formData.email}</p>` : ""}
+      ${formData.subject ? `<p><b>Objet :</b> ${formData.subject}</p>` : ""}
+      ${formData.message ? `<p><b>Message :</b> ${formData.message}</p>` : ""}
+      ${formData.complaint ? `<p><b>Plainte :</b> ${formData.complaint}</p>` : ""}
+      ${formData.suggestion ? `<p><b>Suggestion :</b> ${formData.suggestion}</p>` : ""}
+    `;
+
+    try {
+      const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "api-key": apiKey,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          sender: { name: "COTA Website", email: "direction.cota@gmail.com" },
+          to: [{ email: "direction.cota@gmail.com" }],
+          // ✅ replyTo défini uniquement si l'utilisateur a saisi un e-mail
+          ...(formData.email && { replyTo: { email: formData.email, name: formData.name || "Visiteur" } }),
+          subject: `Nouveau ${type} reçu via le site`,
+          htmlContent: emailContent,
+       }),
+      });
+
+      if (response.ok) {
+        toast.success("Message envoyé avec succès !");
+        setFormData({
+          name: '',
+          email: '',
+          message: '',
+          subject: '',
+          complaint: '',
+          suggestion: ''
+        });
+      } else {
+        toast.error("Erreur lors de l’envoi du message.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Une erreur est survenue. Vérifie ta connexion ou la clé API.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // === Rendu des champs dynamiques ===
   const renderFormFields = () => {
     return formFields[activeTab].map((field) => (
@@ -81,6 +158,8 @@ const Contact = () => {
           <textarea
             id={field.id}
             rows={field.rows}
+            value={formData[field.id] || ''}
+            onChange={(e) => setFormData({ ...formData, [field.id]: e.target.value })}
             className='w-full px-4 py-3 border border-gray-300 rounded-lg 
               focus:ring-2 focus:ring-[#0069BD] focus:border-transparent transition-all'
             placeholder={field.placeholder}
@@ -89,6 +168,8 @@ const Contact = () => {
           <input
             type={field.type}
             id={field.id}
+            value={formData[field.id] || ''}
+            onChange={(e) => setFormData({ ...formData, [field.id]: e.target.value })}
             className='w-full px-4 py-3 border border-gray-300 rounded-lg 
               focus:ring-2 focus:ring-[#0069BD] focus:border-transparent transition-all'
             placeholder={field.placeholder}
@@ -150,18 +231,18 @@ const Contact = () => {
           
           {/* === FORMULAIRE === */}
           <div className='flex-1 w-full max-w-full bg-white rounded-2xl shadow-xl p-8 border border-gray-100 mx-auto sm:mx-0' data-aos='fade-right'>
-            <form className='space-y-6 w-full'>
+            <form className='space-y-6 w-full' onSubmit={handleSubmit}>
               {renderFormFields()}
               <div data-aos='fade-up' data-aos-delay='300'>
                 <button
                   type='submit'
-                  className="w-full py-3 rounded-lg bg-gradient-to-r 
+                  disabled={loading}
+                  className={`w-full py-3 rounded-lg bg-gradient-to-r 
                     from-[#0069BD] to-[#CA451B] text-white font-medium 
                     flex items-center justify-center gap-2 hover:opacity-90 
-                    transition-all duration-300"
+                    transition-all duration-300 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                 >
-                  Envoyer
-                  <Send />
+                  {loading ? 'Envoi en cours...' : <>Envoyer <Send /></>}
                 </button>
               </div>
             </form>
@@ -216,9 +297,11 @@ const Contact = () => {
       {/* === ÉLÉMENTS DÉCORATIFS === */}
       <div className='hidden md:block absolute border-2 border-teal-500 bottom-20 left-10 w-20 h-20 rounded-full opacity-40' data-aos='zoom-in' data-aos-delay='400'></div>
       <div className='hidden md:block absolute border-2 border-yellow-500 top-40 right-10 w-32 h-32 rounded-full opacity-40' data-aos='zoom-in' data-aos-delay='500'></div>
+
+      {/* Notifications Toast */}
+      <ToastContainer position="top-right" autoClose={3000} />
     </section>
   );
 };
 
 export default Contact;
-   

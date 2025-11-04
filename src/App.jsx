@@ -18,7 +18,8 @@ import Footer from "./components/Footer";
 // === PAGES ===
 import Apropos from "./pages/Apropos"; 
 import DomainesDetails from "./pages/DomainesDetails";
-
+import RessourcesDetails from "./pages/RessourcesDetails"; 
+import OffresDetails from "./pages/OffresDetails";
 // === Page d'accueil combinée ===
 const Home = () => {
   return (
@@ -53,7 +54,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/a-propos" element={<Apropos />} />
-         <Route path="/domaines" element={<DomainesDetails />} />
+        <Route path="/domaines" element={<DomainesDetails />} />
+        <Route path="/ressources" element={<RessourcesDetails />} />
+        <Route path="/offres/:id" element={<OffresDetails />} /> 
       </Routes>
     </Router>
   );

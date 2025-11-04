@@ -6,6 +6,7 @@ import {
   ArrowRight, 
   Circle 
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function RessourcesIntro() {
   return (
@@ -79,11 +80,13 @@ export default function RessourcesIntro() {
               Une équipe d’experts multidisciplinaires passionnés par
               l’accompagnement, la transformation et l’innovation sociale.
             </p>
-            <div className="mt-6 flex justify-center items-center 
+            <Link
+              // to='/ressources' 
+              className="mt-6 flex justify-center items-center 
               text-[#00E0FF] font-semibold gap-2 hover:underline 
               cursor-pointer">
-              Découvrir <ArrowRight className="w-4 h-4" />
-            </div>
+              <button>Découvrir</button><ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
           {/* PARTENAIRES */}
@@ -107,10 +110,12 @@ export default function RessourcesIntro() {
               Des collaborations locales et internationales basées sur la confiance
               et la recherche d’un impact durable et mesurable.
             </p>
-            <div className="mt-6 flex justify-center items-center text-[#CA451B] 
+            <Link
+              // to='/ressources'  
+              className="mt-6 flex justify-center items-center text-[#CA451B] 
               font-semibold gap-2 hover:underline cursor-pointer">
               Voir plus <ArrowRight className="w-4 h-4" />
-            </div>
+            </Link>
           </div>
 
           {/* TRAVAILLER AVEC NOUS */}
@@ -136,10 +141,12 @@ export default function RessourcesIntro() {
               Rejoignez nos projets, postulez à nos offres ou proposez votre
               expertise pour renforcer nos actions.
             </p>
-            <div className="mt-6 flex justify-center items-center text-[#00AB9A] 
+            <Link 
+              // to='/ressources' 
+              className="mt-6 flex justify-center items-center text-[#00AB9A] 
               font-semibold gap-2 hover:underline cursor-pointer">
               Voir les offres <ArrowRight className="w-4 h-4" />
-            </div>
+            </Link>
           </div>
         </div>
       </div>

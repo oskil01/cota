@@ -5,25 +5,44 @@ import { Mail, Send, Circle } from "lucide-react";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // Validation simple de l'email
-  const handleSubmit = (e) => {
+  // Fonction de soumission
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(email)) {
-      setError("❌ Veuillez entrer une adresse e-mail valide.");
+      setMessage("❌ Veuillez entrer une adresse e-mail valide.");
       return;
     }
 
-    setError("");
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setEmail("");
-    }, 4000);
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage("✅ Merci pour votre inscription ! Vous recevrez bientôt nos mises à jour.");
+        setEmail("");
+      } else {
+        setMessage(`❌ Erreur : ${data.error || "Une erreur est survenue."}`);
+      }
+    } catch (error) {
+      setMessage("❌ Erreur réseau. Veuillez réessayer plus tard.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -39,25 +58,17 @@ const Newsletter = () => {
 
       {/* === Contenu principal === */}
       <div className="relative z-10 container mx-auto px-6 text-center text-white">
-        {/* === Titre et description === */}
-        <h2
-          className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight"
-          data-aos="fade-down"
-        >
-          Rejoignez notre{" "}
-          <span className="text-[#00bfff]">Newsletter</span>
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight" data-aos="fade-down">
+          Rejoignez notre <span className="text-[#00bfff]">Newsletter</span>
         </h2>
         <div className="flex justify-center gap-3 mt-4 md:mt-5">
           <Circle className="text-[#022256] w-5 h-5" />
           <Circle className="text-[#0069BD] w-5 h-5" />
           <Circle className="text-[#00AB9A] w-5 h-5" />
-          <Circle className="text-[#CA451B] w-5 h-5" /> 
+          <Circle className="text-[#CA451B] w-5 h-5" />
         </div>
-        <p
-          className="text-gray-300 max-w-2xl mx-auto mb-10 mt-5 text-md"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
+
+        <p className="text-gray-300 max-w-2xl mx-auto mb-10 mt-5 text-md" data-aos="fade-up" data-aos-delay="200">
           Recevez nos dernières actualités, opportunités et formations directement
           dans votre boîte mail. Soyez les premiers informés !
         </p>
@@ -81,35 +92,28 @@ const Newsletter = () => {
           </div>
           <button
             type="submit"
-            className="flex items-center gap-2 bg-[#00bfff] hover:bg-[#009adf] text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-[#00bfff]/40"
+            disabled={loading}
+            className="flex items-center gap-2 bg-[#00bfff] hover:bg-[#009adf] text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-[#00bfff]/40 disabled:opacity-50"
           >
             <Send className="w-5 h-5" />
-            S’abonner
+            {loading ? "Envoi..." : "S’abonner"}
           </button>
         </form>
 
         {/* === Message de retour === */}
-        <div
-          className="mt-6 text-sm"
-          data-aos="fade-up"
-          data-aos-delay="600"
-        >
-          {error && (
-            <p className="text-red-400 animate-pulse">{error}</p>
-          )}
-          {submitted && (
-            <p className="text-green-400 font-medium animate-fadeInUp">
-              ✅ Merci pour votre inscription ! Vous recevrez bientôt nos mises à jour.
-            </p>
-          )}
-        </div>
+        {message && (
+          <p
+            className={`mt-6 text-sm ${
+              message.startsWith("✅") ? "text-green-400" : "text-red-400"
+            } animate-fadeInUp`}
+            data-aos="fade-up"
+            data-aos-delay="600"
+          >
+            {message}
+          </p>
+        )}
 
-        {/* === Message de confiance === */}
-        <p
-          className="mt-6 text-sm text-gray-400"
-          data-aos="fade-up"
-          data-aos-delay="800"
-        >
+        <p className="mt-6 text-sm text-gray-400" data-aos="fade-up" data-aos-delay="800">
           Nous respectons votre vie privée — aucun spam, seulement du contenu utile.
         </p>
       </div>

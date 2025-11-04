@@ -15,14 +15,14 @@ export default function AboutSection() {
       <div className="absolute inset-0 animate-waves 
        bg-[radial-gradient(circle_at_25%_25%,#0069BD,transparent_70%),radial-gradient(circle_at_75%_75%,#011433,transparent_70%)]"></div>
       <div className="absolute inset-0 bg-gradient-to-br from-[#03337F]/70 to-[#0069BD]/70 mix-blend-overlay"></div>
-
+    
       {/* IMAGE */}
       <div
         className="relative w-full lg:mr-8 z-10 flex-1 
        xl:mr-12 lg:mt-0 mt-10 order-2 flex justify-center"
       >
         <div
-          className="w-full max-w-md max-auto lg:max-w-lg
+          className="w-full max-w-sm max-auto lg:max-w-lg
         xl:max-w-xl h-[200px] sm:h-[250px] md:h-[300px]
         lg:h-[450px] xl:h-[500px] overflow-hidden shadow-lg -rotate-2
         md:shadow-xl relative z-10 rounded-[40%_60%_70%_30%/40%_50%_60%_60%]
@@ -62,7 +62,7 @@ export default function AboutSection() {
         </div>
 
         <p
-          className="text-gray-200 max-w-lg mb-6 leading-relaxed mx-auto lg:mx-0"
+          className="text-gray-200 mb-6 leading-relaxed lg:mx-0"
           data-aos="fade-left"
           data-aos-delay="100"
         >
@@ -101,9 +101,7 @@ export default function AboutSection() {
             <p className="text-gray-600 text-sm md:text-[13px]">
               Fournir un accompagnement technique, stratégique et innovant aux
               organisations, entreprises, institutions et communautés, afin de
-              renforcer leurs capacités, améliorer leurs performances et
-              promouvoir un développement inclusif, durable et participatif en
-              RDC.
+              renforcer leurs capacités, améliorer leurs performances.
             </p>
           </div>
 
@@ -125,8 +123,7 @@ export default function AboutSection() {
               COTA ambitionne de devenir un acteur de référence en
               accompagnement technique et en innovation en RDC, contribuant à la
               construction d’organisations performantes, d’entreprises durables
-              et de communautés résilientes, dans le respect des droits humains
-              et de la gouvernance responsable.
+              et de communautés résilientes.
             </p>
           </div>
         </div>
