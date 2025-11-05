@@ -81,52 +81,45 @@ const Contact = () => {
     suggestion: suggestionImage
   };
 
-  // === Fonction d’envoi avec Brevo ===
+  // === Fonction d’envoi : maintenant on appelle /api/sendEmail (serverless) ===
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const type = activeTab;
 
-    // ✅ Validation du champ email uniquement pour le formulaire de contact
-    if (type === 'contact' && !formData.email) {
-      toast.error("Veuillez entrer votre adresse e-mail.");
-      return;
+    // Validation email uniquement pour le formulaire contact
+    if (type === 'contact') {
+      if (!formData.email) {
+        toast.error("Veuillez entrer votre adresse e-mail.");
+        return;
+      }
+      // validation simple
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        toast.error("Adresse e-mail invalide.");
+        return;
+      }
     }
 
     setLoading(true);
 
-    const apiKey = import.meta.env.VITE_BREVO_API_KEY;
-
-    // Construction du contenu du mail
-    const emailContent = `
-      <h3>Nouveau message (${type}) reçu depuis le site :</h3>
-      ${formData.name ? `<p><b>Nom :</b> ${formData.name}</p>` : ""}
-      ${formData.email ? `<p><b>Email :</b> ${formData.email}</p>` : ""}
-      ${formData.subject ? `<p><b>Objet :</b> ${formData.subject}</p>` : ""}
-      ${formData.message ? `<p><b>Message :</b> ${formData.message}</p>` : ""}
-      ${formData.complaint ? `<p><b>Plainte :</b> ${formData.complaint}</p>` : ""}
-      ${formData.suggestion ? `<p><b>Suggestion :</b> ${formData.suggestion}</p>` : ""}
-    `;
+    // Prépare payload (envoie tout le form data + le type)
+    const payload = {
+      ...formData,
+      type
+    };
 
     try {
-      const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+      // Appel à l'endpoint serverless Vercel (pas d'API key dans le front)
+      const res = await fetch("/api/sendEmail", {
         method: "POST",
-        headers: {
-          accept: "application/json",
-          "api-key": apiKey,
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          sender: { name: "COTA Website", email: "direction.cota@gmail.com" },
-          to: [{ email: "direction.cota@gmail.com" }],
-          // ✅ replyTo défini uniquement si l'utilisateur a saisi un e-mail
-          ...(formData.email && { replyTo: { email: formData.email, name: formData.name || "Visiteur" } }),
-          subject: `Nouveau ${type} reçu via le site`,
-          htmlContent: emailContent,
-       }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
 
-      if (response.ok) {
+      const data = await res.json();
+
+      if (res.ok) {
         toast.success("Message envoyé avec succès !");
         setFormData({
           name: '',
@@ -137,11 +130,13 @@ const Contact = () => {
           suggestion: ''
         });
       } else {
-        toast.error("Erreur lors de l’envoi du message.");
+        // Affiche message renvoyé par l'API si disponible
+        console.error("Erreur API sendEmail:", data);
+        toast.error(data?.error || "Erreur lors de l’envoi du message.");
       }
     } catch (error) {
-      console.error(error);
-      toast.error("Une erreur est survenue. Vérifie ta connexion ou la clé API.");
+      console.error("Erreur réseau / fetch:", error);
+      toast.error("Une erreur est survenue. Vérifie ta connexion.");
     } finally {
       setLoading(false);
     }

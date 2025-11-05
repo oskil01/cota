@@ -19,10 +19,10 @@ import Footer from "../components/Footer";
 
 const domaineImages = [
   "/images/consultance.jpg",
-  "/images/domaine2.jpg",
-  "/images/domaine3.jpg",
-  "/images/domaine4.jpg",
-  "/images/domaine5.jpg",
+  "/images/solutions.jpg",
+  "/images/economy.jpg",
+  "/images/health.jpg",
+  "/images/communication.jpg",
   "/images/domainesBG.jpg",
 ];
 
@@ -35,7 +35,7 @@ export default function DomainesDetails() {
     {
       id: 1,
       title: "Accompagnement et consultance organisationnelle",
-      icon: <Briefcase size={45} className="text-[#03337F]" />,
+      icon: <Briefcase size={75} className="text-white/80 bg-[#03337F] py-6 rounded rounded-xl" />,
       image: domaineImages[0],
       description:
         "Nous accompagnons les entreprises, ONG et institutions dans le renforcement de leurs capacités organisationnelles et stratégiques, en offrant des services de conseil, de planification et de suivi de la performance institutionnelle.",
@@ -51,7 +51,7 @@ export default function DomainesDetails() {
     {
       id: 2,
       title: "Innovation et technologies numériques",
-      icon: <Rocket size={35} className="text-yellow-500" />,
+      icon: <Rocket size={75} className="text-white/80 bg-yellow-600 py-6 rounded rounded-xl" />,
       image: domaineImages[1],
       description:
         "Ce domaine vise à promouvoir la transformation numérique des organisations et des communautés à travers la conception de solutions technologiques sur mesure, adaptées à leurs besoins et réalités locales.",
@@ -68,7 +68,7 @@ export default function DomainesDetails() {
       id: 3,
       title:
         "Entrepreneuriat, développement économique et moyens de subsistance",
-      icon: <TrendingUp size={55} className="text-[#03337F] " />,
+      icon: <TrendingUp size={75} className="text-white/80 bg-blue-800 py-6 rounded rounded-xl" />,
       image: domaineImages[2],
       description:
         "Nous soutenons les jeunes, les start-ups et les initiatives locales dans le développement de leurs projets économiques, la création d’emplois et la promotion d’un entrepreneuriat responsable et inclusif.",
@@ -84,15 +84,15 @@ export default function DomainesDetails() {
     {
       id: 4,
       title: "Santé et protection de l’environnement",
-      icon: <Leaf size={35} className="text-[#03337F]" />,
+      icon: <Leaf size={75} className="text-white/80 bg-[#00AB9A] py-4 rounded rounded-xl" />,
       image: domaineImages[3],
       description:
         "Nos interventions intègrent la promotion de la santé communautaire et la durabilité environnementale, en appuyant des initiatives de prévention, de sensibilisation et de gestion durable des ressources naturelles.",
       points: [
-        "Conception et mise en œuvre de programmes de santé communautaire",
+        "Gestion de risques des catastrophes (GRC)",
         "Lutte contre la pollution et la dégradation environnementale",
         "Promotion des énergies renouvelables et pratiques écologiques",
-        "Sensibilisation à l’hygiène, la nutrition et la santé publique",
+        "Promotion de l'hygiène, assainissement et santé communautaire",
       ],
       objectif:
         "Favoriser des communautés saines et un environnement durable à travers une approche intégrée santé–environnement.",
@@ -100,7 +100,7 @@ export default function DomainesDetails() {
     {
       id: 5,
       title: "Communication et sensibilisation",
-      icon: <Megaphone size={35} className="text-[#03337F]" />,
+      icon: <Megaphone size={75} className="text-white/80 bg-[#CA451B] py-4 rounded rounded-xl" />,
       image: domaineImages[4],
       description:
         "Nous développons des stratégies de communication et de plaidoyer visant à diffuser des messages utiles, mobiliser les acteurs sociaux et renforcer la visibilité des actions communautaires et institutionnelles.",
@@ -116,13 +116,13 @@ export default function DomainesDetails() {
     {
       id: 6,
       title: "Droits de l’Homme et Gouvernance",
-      icon: <Scale size={35} className="text-[#03337F]" />,
+      icon: <Scale size={75} className="text-white/80 bg-green-800 py-4 rounded rounded-xl" />,
       image: domaineImages[5],
       description:
         "Nous œuvrons pour la promotion et la protection des droits humains fondamentaux, tout en appuyant les institutions et les acteurs locaux dans la mise en œuvre de principes de gouvernance démocratique, d’éthique et de redevabilité.",
       points: [
-        "Sensibilisation aux droits civils, politiques, économiques et sociaux",
-        "Renforcement des capacités des acteurs institutionnels et communautaires",
+        "Sensibilisation aux droits humains, genre et inclusion sociale",
+        "Renforcement des capacités sur la sensibilité aux conflits intercommunautaires",
         "Appui à la transparence, à la participation et à la redevabilité",
         "Plaidoyer pour l’égalité des genres et la justice sociale",
       ],
@@ -146,7 +146,7 @@ export default function DomainesDetails() {
       >
         <h1
           data-aos="fade-down"
-          className="text-3xl sm:text-5xl md:text-6xl font-extrabold md:mb-4"
+          className="text-3xl sm:text-5xl md:text-6xl pt-15 font-extrabold md:mb-4"
         >
           Nos domaines d'activité
         </h1>

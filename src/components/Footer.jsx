@@ -10,7 +10,7 @@ const Footer = () => {
   ];
   const quickLinks = [
     {label: "Accueil", href:"#"},
-    {label: "A propos de COTA", href:"#"},
+    {label: "A propos de COTA", href:"a-propos"},
     {label: "Notre équipe", href:"#"},
     {label: "Actualités", href:"#"},
     {label: "Offres d'emploi", href:"#"},
