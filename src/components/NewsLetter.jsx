@@ -1,14 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Send, Circle } from "lucide-react";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(100); // pour la barre
 
-  // Fonction de soumission
+  // Effet pour faire disparaître le message automatiquement
+  useEffect(() => {
+    if (!message) return;
+
+    setProgress(100); // reset
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev <= 0) {
+          clearInterval(interval);
+          setMessage(""); // supprime le message quand barre vide
+          return 0;
+        }
+        return prev - 1; // diminue progressivement
+      });
+    }, 30); // 30ms par step = ~3 secondes
+
+    return () => clearInterval(interval);
+  }, [message]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -24,21 +43,26 @@ const Newsletter = () => {
     try {
       const response = await fetch("/api/newsletter", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("✅ Merci pour votre inscription ! Vous recevrez bientôt nos mises à jour.");
-        setEmail("");
-      } else {
-        setMessage(`❌ Erreur : ${data.error || "Une erreur est survenue."}`);
-      }
-    } catch (error) {
+  setMessage("✅ Merci pour votre inscription ! Vous recevrez bientôt nos mises à jour.");
+  setEmail("");
+
+  // Envoi automatique du mail de remerciement
+  await fetch("/api/sendThankYouEmail", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, name: "" }),
+  });
+  } else {
+  setMessage(`❌ Erreur : ${data.error || "Une erreur est survenue."}`);
+}
+} catch {
       setMessage("❌ Erreur réseau. Veuillez réessayer plus tard.");
     } finally {
       setLoading(false);
@@ -51,12 +75,10 @@ const Newsletter = () => {
       data-aos="fade-up"
       data-aos-duration="1200"
     >
-      {/* === Motif animé de fond === */}
       <div className="absolute inset-0">
         <div className="bg-[radial-gradient(circle_at_25%_25%,#ffffff22_0%,transparent_70%)] w-full h-full animate-[moveBg_20s_linear_infinite]" />
       </div>
 
-      {/* === Contenu principal === */}
       <div className="relative z-10 container mx-auto px-6 text-center text-white">
         <h2 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight" data-aos="fade-down">
           Rejoignez notre <span className="text-[#00bfff]">Newsletter</span>
@@ -69,11 +91,9 @@ const Newsletter = () => {
         </div>
 
         <p className="text-gray-300 max-w-2xl mx-auto mb-10 mt-5 text-md" data-aos="fade-up" data-aos-delay="200">
-          Recevez nos dernières actualités, opportunités et formations directement
-          dans votre boîte mail. Soyez les premiers informés !
+          Recevez nos dernières actualités, opportunités et formations directement dans votre boîte mail. Soyez les premiers informés !
         </p>
 
-        {/* === Formulaire === */}
         <form
           onSubmit={handleSubmit}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto"
@@ -100,17 +120,23 @@ const Newsletter = () => {
           </button>
         </form>
 
-        {/* === Message de retour === */}
+        {/* === Message de retour avec barre de progression === */}
         {message && (
-          <p
-            className={`mt-6 text-sm ${
-              message.startsWith("✅") ? "text-green-400" : "text-red-400"
-            } animate-fadeInUp`}
-            data-aos="fade-up"
-            data-aos-delay="600"
-          >
-            {message}
-          </p>
+          <div className="relative mt-6 max-w-xl mx-auto">
+            <p
+              className={`text-sm ${message.startsWith("✅") ? "text-green-400" : "text-red-400"} animate-fadeInUp`}
+              data-aos="fade-up"
+              data-aos-delay="600"
+            >
+              {message}
+            </p>
+            <div className="absolute bottom-0 left-0 h-1 bg-white/40 rounded-full w-full">
+              <div
+                className="h-1 bg-white rounded-full transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
         )}
 
         <p className="mt-6 text-sm text-gray-400" data-aos="fade-up" data-aos-delay="800">
@@ -118,28 +144,17 @@ const Newsletter = () => {
         </p>
       </div>
 
-      {/* === Style d'animation du fond === */}
       <style jsx>{`
         @keyframes moveBg {
-          0% {
-            background-position: 0 0;
-          }
-          100% {
-            background-position: 600px 600px;
-          }
+          0% { background-position: 0 0; }
+          100% { background-position: 600px 600px; }
         }
         .animate-fadeInUp {
           animation: fadeInUp 0.8s ease forwards;
         }
         @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </section>
